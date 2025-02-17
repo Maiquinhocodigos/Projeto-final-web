@@ -1,15 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Projeto Final web</title>
-</head>
-<body>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto HTML</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Cabeçalho</h1>
+      
+      <nav class="menu">
+        <ul>
+          <li><a href="#all">All</a></li>
+          <li><a href="#paid">Paid</a></li>
+          <li><a href="#unpaid">Unpaid</a></li>
+          <li><a href="#overdue">Overdue</a></li>
+        </ul>
+      </nav>
+      
+      <form class="form">
+        <input type="text" placeholder="Buscar por nome, email ou data" aria-label="Buscar por nome, email ou data" />
+        <button type="submit">Filtrar</button>
+      </form>
+    </header>
     
-
-
-    <script src="./assets/javascript/script.js"></script>
-</body>
+    <section class="lista">
+      <form>
+        <div class="item">
+          <input type="checkbox" id="user1" name="user1" />
+          <label for="user1">
+            <strong>Nome Funcionário</strong>
+            <p>Vínculo: Tipo</p>
+            <p>Status: <span>Ativo</span></p>
+            <p>Setor: <span>Folha</span></p>
+            <p>Salário: R$0000,00</p>
+          </label>
+        </div>
+        
+        <div class="item">
+          <input type="checkbox" id="user2" name="user2" />
+          <label for="user2">
+            <strong>Nome Funcionário</strong>
+            <p>Vínculo: Tipo</p>
+            <p>Status: <span>Ativo</span></p>
+            <p>Setor: <span>Folha</span></p>
+            <p>Salário: R$0000,00</p>
+          </label>
+        </div>
+      </form>
+    </section>
+    
+    <script src="script.js"></script>
+  </body>
 </html>

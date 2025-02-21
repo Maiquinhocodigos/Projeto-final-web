@@ -4,53 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projeto HTML</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
     <header class="header">
-      <h1>Cabeçalho</h1>
-      
       <nav class="menu">
         <ul>
-          <li><a href="#all">All</a></li>
-          <li><a href="#paid">Paid</a></li>
+          <!-- o all vai listar todos os funcionarois dnv na tela -->
+          <li id="all"><a >All</a></li>
+          <li><a href="#paid">Cargos</a></li>
           <li><a href="#unpaid">Unpaid</a></li>
           <li><a href="#overdue">Overdue</a></li>
         </ul>
       </nav>
+
+      <h2>Funcionarios Quixada</h2>
       
-      <form class="form">
-        <input type="text" placeholder="Buscar por nome, email ou data" aria-label="Buscar por nome, email ou data" />
-        <button type="submit">Filtrar</button>
-      </form>
+      <div class="barraPesquisa">
+        <input type="text" id="resultPesquisa" placeholder="Procure por nome, cargo ou matricula">
+        <button id="bttPesquisa">Pesquisar</button>
+    </div>
     </header>
     
-    <section class="lista">
-      <form>
-        <div class="item">
-          <input type="checkbox" id="user1" name="user1" />
-          <label for="user1">
-            <strong>Nome Funcionário</strong>
-            <p>Vínculo: Tipo</p>
-            <p>Status: <span>Ativo</span></p>
-            <p>Setor: <span>Folha</span></p>
-            <p>Salário: R$0000,00</p>
-          </label>
-        </div>
+        <div id="listaFuncionarios" class="listaFuncionarios"></div>
         
-        <div class="item">
-          <input type="checkbox" id="user2" name="user2" />
-          <label for="user2">
-            <strong>Nome Funcionário</strong>
-            <p>Vínculo: Tipo</p>
-            <p>Status: <span>Ativo</span></p>
-            <p>Setor: <span>Folha</span></p>
-            <p>Salário: R$0000,00</p>
-          </label>
-        </div>
-      </form>
-    </section>
-    
-    <script src="script.js"></script>
+    <script src="./assets/javascript/script.js"></script>
   </body>
 </html>

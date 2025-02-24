@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         mostraJson(data);
     });
 
-    // Buscar e exibir dados ao carregar a página
+    
     const data = await fetchData();
     mostraJson(data);
 });

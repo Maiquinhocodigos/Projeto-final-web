@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto HTML</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="./assets/css/style.css">
-  </head>
-  <body>
-    <header class="header">
-      <nav class="menu">
-        <ul>
-          <!-- o all vai listar todos os funcionarois dnv na tela -->
-          <li id="all"><a >All</a></li>
-          <li><a href="#paid">Cargos</a></li>
-          <li><a href="#unpaid">Unpaid</a></li>
-          <li><a href="#overdue">Overdue</a></li>
-        </ul>
-      </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funcionários Quixadá</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="menu">
+      <ul>
+        <li id="all"><a href="#">Todos</a></li>
+        <li><a href="#paid">Cargos</a></li>
+        <li><a href="#unpaid">Unpaid</a></li>
+        <li><a href="#overdue">Overdue</a></li>
+      </ul>
+    </nav>
 
-      <h2>Funcionarios Quixada</h2>
+    <h2>Funcionários Quixadá</h2>
 
-      <div class="barraPesquisa">
-        <input type="text" id="resultPesquisa" placeholder="Procure por nome, cargo ou matricula">
-        <button id="bttPesquisa">Pesquisar</button>
+    <div class="barraPesquisa">
+      <input type="text" id="resultPesquisa" placeholder="Procure por nome, cargo ou matrícula">
+      <button id="bttPesquisa">Pesquisar</button>
     </div>
-    </header>
-    
-        <div id="listaFuncionarios" class="listaFuncionarios"></div>
-        
-    <script src="./assets/javascript/script.js"></script>
-  </body>
+  </header>
+
+  <!-- Lista de Funcionários -->
+  <div id="listaFuncionarios" class="listaFuncionarios"></div>
+
+  <!-- Seção de Médias -->
+  <div id="mediaContainer" class="media-container">
+    <h3>Médias Gerais</h3>
+    <div class="media-item">
+      <span>Média de Proventos:</span> <span id="mediaProventos">R$ 0,00</span>
+    </div>
+    <div class="media-item">
+      <span>Média de Descontos:</span> <span id="mediaDescontos">R$ 0,00</span>
+    </div>
+    <div class="media-item">
+      <span>Média Líquida:</span> <span id="mediaLiquido">R$ 0,00</span>
+    </div>
+  </div>
+
+  <script src="./assets/javascript/script.js"></script>
+</body>
 </html>
+

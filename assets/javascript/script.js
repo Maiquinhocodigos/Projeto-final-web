@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const resultPesquisa = document.getElementById("resultPesquisa");
   const bttPesquisa = document.getElementById("bttPesquisa");
   const listaFuncionarios = document.getElementById("listaFuncionarios");
-  const allButton = document.getElementById("all");
   const cargosButton = document.getElementById('cargos');
+  const allButton = document.getElementById("all");
   const mediaProventos = document.getElementById("mediaProventos");
   const mediaDescontos = document.getElementById("mediaDescontos");
   const mediaLiquido = document.getElementById("mediaLiquido");
@@ -14,13 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     return json.data;
   }
 
-  
   function parseCurrency(valor) {
     if (typeof valor === 'number') {
       return valor;
     }
     if (typeof valor === 'string') {
-      return parseFloat(valor.replace('R$ ', '').replace(/\./g, '').replace(',', '.')) || 0;
+      return parseFloat(valor.replace(/\./g, '').replace(',', '.').replace('R$ ', '')) || 0;
     }
     return 0;
   }
@@ -28,14 +27,42 @@ document.addEventListener('DOMContentLoaded', async () => {
   function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', {
       style: 'currency',
-      currency: 'BRL'
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
+  }
+
+  function calcularProventos(item) {
+    let valor = parseCurrency(item.Proventos);
+    if (valor < 100) {
+      valor *= 1000;
+    }
+    return valor;
+  }
+
+  function calcularLiquido(item) {
+    return parseCurrency(item["Líquido"]);
+  }
+
+  function calcularDescontos(proventos, liquido) {
+    return proventos - liquido;
   }
 
   function mostraJson(data) {
     listaFuncionarios.innerHTML = '';
+    let totalProventos = 0, totalLiquido = 0, totalDescontos = 0, count = 0;
 
     data.forEach(item => {
+      const proventos = calcularProventos(item);
+      const liquido = calcularLiquido(item);
+      const descontos = calcularDescontos(proventos, liquido);
+
+      totalProventos += proventos;
+      totalLiquido += liquido;
+      totalDescontos += descontos;
+      count++;
+
       const div = document.createElement('div');
       div.className = 'result-item';
       div.innerHTML = `
@@ -46,32 +73,18 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div><span>Setor:</span> ${item.Setor}</div>
         </div>
         <div class="result-salarios">
-          <div><span>Proventos:</span> ${item.Proventos}</div>
-          <div><span>Descontos:</span> ${item.Descontos}</div>
-          <div><span>Líquido:</span> ${item["Líquido"]}</div>
+          <div><span>Proventos:</span> ${formatarMoeda(proventos)}</div>
+          <div><span>Descontos:</span> ${formatarMoeda(descontos)}</div>
+          <div><span>Líquido:</span> ${formatarMoeda(liquido)}</div>
         </div>
       `;
       listaFuncionarios.appendChild(div);
     });
 
-    if (data.length > 0) {
-      let totalProventos = 0, totalDescontos = 0, totalLiquido = 0, count = 0;
-      data.forEach(item => {
-        const proventos = parseCurrency(item.Proventos);
-        const descontos = parseCurrency(item.Descontos);
-        const liquido = parseCurrency(item["Líquido"]);
-        if (!isNaN(proventos) && !isNaN(descontos) && !isNaN(liquido)) {
-          totalProventos += proventos;
-          totalDescontos += descontos;
-          totalLiquido += liquido;
-          count++;
-        }
-      });
-      if (count > 0) {
-        mediaProventos.textContent = formatarMoeda(totalProventos / count);
-        mediaDescontos.textContent = formatarMoeda(totalDescontos / count);
-        mediaLiquido.textContent = formatarMoeda(totalLiquido / count);
-      }
+    if (count > 0) {
+      mediaProventos.textContent = formatarMoeda(totalProventos / count);
+      mediaDescontos.textContent = formatarMoeda(totalDescontos / count);
+      mediaLiquido.textContent = formatarMoeda(totalLiquido / count);
     }
   }
 
@@ -93,9 +106,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   cargosButton.addEventListener('click', async () => {
     const data = await fetchData();
-    const cargos = [...new Set(data.map(item => item.Cargo.split(' - ')[1]))]; // Obter cargos únicos
+    const cargos = [...new Set(data.map(item => item.Cargo))];
 
-    
     let dropdown = document.querySelector('.dropdown');
     if (dropdown) {
         dropdown.remove();
@@ -108,23 +120,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         const a = document.createElement('a');
         a.textContent = cargo;
         a.addEventListener('click', () => {
-            const filteredData = data.filter(item => item.Cargo.split(' - ')[1] === cargo);
-            displayResults(filteredData);
-            dropdown.classList.remove('show'); // Fechar dropdown ao selecionar um cargo
+            const filteredData = data.filter(item => item.Cargo === cargo);
+            mostraJson(filteredData);
+            dropdown.classList.remove('show');
         });
         dropdown.appendChild(a);
     });
 
     cargosButton.appendChild(dropdown);
     dropdown.classList.toggle('show');
-    });
+  });
 
-    document.addEventListener('click', (event) => {
+  document.addEventListener('click', (event) => {
     const dropdown = document.querySelector('.dropdown');
-        if (dropdown && !dropdown.contains(event.target) && !cargosButton.contains(event.target)) {
-        dropdown.classList.remove('show');
-        }
-    });
+    if (dropdown && !dropdown.contains(event.target) && !cargosButton.contains(event.target)) {
+      dropdown.classList.remove('show');
+    }
+  });
 
   const data = await fetchData();
   mostraJson(data);

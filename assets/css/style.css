@@ -1,56 +1,85 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #090018;
-    padding: 20px;
-  }
-  
-  .header {
-    background-color: #090018;
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    flex-wrap: wrap; 
-  }
-
-  .barraPesquisa {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-
-    & input {
-      width: 300px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-right: 10px;
-    }
-
-    & button {
-      padding: 10px 20px;
-      border: none;
-      background-color: #2722c1;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    & button:hover {
-      background-color: #45a049;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #090018;
+  padding-top: 140px; /* Ajuste conforme a altura do seu header */
+  margin: 0;
+}
+
+.header {
+  background-color: #090018;
+  color: #fff;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.menu ul li {
+  margin: 0 15px;
+}
+
+.menu ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.menu ul li a:hover {
+  color: #1abc9c;
+}
+
+.barraPesquisa {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.barraPesquisa input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.barraPesquisa button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #2722c1;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.barraPesquisa button:hover {
+  background-color: #45a049;
+}
 
 .listaFuncionarios {
   display: flex;
@@ -77,47 +106,44 @@
   flex-direction: column;
 }
 
-.result-detalhes div {
-  margin: 5px 0;
+.media-container {
+  margin: 20px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.result-detalhes span {
+.media-item {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.media-item span {
   font-weight: bold;
+  color: #000;
 }
 
-.result-salarios {
-  text-align: right;
-  margin-left: 20px;
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
+  }
+
+  body {
+    padding-top: 160px; /* Ajuste para mobile */
+  }
+
+  .barraPesquisa input {
+    width: 100%;
+  }
+
+  .result-item {
+    width: 95%;
+    flex-direction: column;
+  }
 }
-    
-  .menu ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin-bottom: 10px;
-
-    & li {
-      cursor: pointer;
-    }
-  }
-  
-  .menu ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .menu ul li a:hover {
-    background-color: #555;
-  }
-
-  h2 {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #2d0d49;
-  }
-  
-  

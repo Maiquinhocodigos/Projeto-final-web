@@ -71,14 +71,14 @@ body {
 .barraPesquisa button {
   padding: 10px 20px;
   border: none;
-  background-color: #2722c1;
+  background-color: #45a049;
   color: white;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .barraPesquisa button:hover {
-  background-color: #45a049;
+  background-color: #1abc9c;
 }
 
 .listaFuncionarios {
@@ -146,4 +146,27 @@ body {
     width: 95%;
     flex-direction: column;
   }
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #090018;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #454545;
+}
+
+.show {
+  display: block;
 }

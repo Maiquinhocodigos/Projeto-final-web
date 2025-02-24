@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const bttPesquisa = document.getElementById("bttPesquisa");
   const listaFuncionarios = document.getElementById("listaFuncionarios");
   const allButton = document.getElementById("all");
+  const cargosButton = document.getElementById('cargos');
   const mediaProventos = document.getElementById("mediaProventos");
   const mediaDescontos = document.getElementById("mediaDescontos");
   const mediaLiquido = document.getElementById("mediaLiquido");
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return json.data;
   }
 
-  // Atualizada para verificar o tipo do valor
+  
   function parseCurrency(valor) {
     if (typeof valor === 'number') {
       return valor;
@@ -89,6 +90,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchData();
     mostraJson(data);
   });
+
+  cargosButton.addEventListener('click', async () => {
+    const data = await fetchData();
+    const cargos = [...new Set(data.map(item => item.Cargo.split(' - ')[1]))]; // Obter cargos únicos
+
+    
+    let dropdown = document.querySelector('.dropdown');
+    if (dropdown) {
+        dropdown.remove();
+    }
+
+    dropdown = document.createElement('div');
+    dropdown.className = 'dropdown';
+
+    cargos.forEach(cargo => {
+        const a = document.createElement('a');
+        a.textContent = cargo;
+        a.addEventListener('click', () => {
+            const filteredData = data.filter(item => item.Cargo.split(' - ')[1] === cargo);
+            displayResults(filteredData);
+            dropdown.classList.remove('show'); // Fechar dropdown ao selecionar um cargo
+        });
+        dropdown.appendChild(a);
+    });
+
+    cargosButton.appendChild(dropdown);
+    dropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (event) => {
+    const dropdown = document.querySelector('.dropdown');
+        if (dropdown && !dropdown.contains(event.target) && !cargosButton.contains(event.target)) {
+        dropdown.classList.remove('show');
+        }
+    });
 
   const data = await fetchData();
   mostraJson(data);
